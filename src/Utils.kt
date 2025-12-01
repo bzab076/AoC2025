@@ -123,7 +123,7 @@ fun <T, U> cartesianProduct(c1: Collection<T>, c2: Collection<U>): List<Pair<T, 
 
 typealias Point = Pair<Int, Int>
 
-class Point2D (val x:Int, val y:Int) {
+data class Point2D (val x:Int, val y:Int) {
 
     constructor(pair : Pair<Int, Int>) : this(pair.first, pair.second)
 
@@ -143,15 +143,6 @@ class Point2D (val x:Int, val y:Int) {
     }
 
     fun longID() : Long = x.toLong() + 10000*y.toLong()
-
-    override fun equals(other: Any?): Boolean {
-        return other is Point2D && x==other.x && y==other.y
-    }
-
-    override fun hashCode(): Int {
-        return longID().toInt()
-    }
-
 }
 
 val adjacentPoints2D : List<Point2D> = listOf(Point2D(0, 1), Point2D(0, -1), Point2D(1, 0), Point2D(-1, 0))
@@ -165,7 +156,7 @@ val adjacentDiagPoints2D : List<Point2D> = adjacentPoints2D + listOf(
 fun manhattan2D(p1 : Point2D, p2 : Point2D) = abs(p1.x - p2.x) + abs(p1.y - p2.y)
 fun manhattan3D(p1 : Point3D, p2 : Point3D) = abs(p1.x - p2.x) + abs(p1.y - p2.y) + abs(p1.z - p2.z)
 
-class Point3D (val x : Int, val y : Int, val z : Int){
+data class Point3D (val x : Int, val y : Int, val z : Int){
 
     fun transform(orientation : Int) =
         when(orientation % 24) {
@@ -201,13 +192,4 @@ class Point3D (val x : Int, val y : Int, val z : Int){
     fun scalarMultiplication(m:Int) : Point3D = Point3D(x*m, y*m, z*m)
 
     fun longID() : Long = x.toLong() + 10000*y.toLong() + 100000000*z.toLong()
-
-    override fun equals(other: Any?): Boolean {
-        return other is Point3D && x==other.x && y==other.y && z==other.z
-    }
-
-    override fun hashCode(): Int {
-        return longID().toInt()
-    }
-
 }
