@@ -1,7 +1,6 @@
 @Suppress("unused")
 class Day06 : AbstractDay(6) {
 
-    //private val nums = inputLines().dropLast(1).map{it.extractNumbers()}
     private val lines = inputLines().dropLast(1).map { "$it " }
     private val cols = getColumns(emptyList(), lines)
     private val ops = inputLines().last().split(" ").map { it.trim() }.filter { it.isNotEmpty() }.map { it[0] }
