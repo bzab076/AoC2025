@@ -21,15 +21,12 @@ class Day06 : AbstractDay(6) {
         return getColumns(acc + listOf(cols), tails)
     }
 
-    private fun transposeNumStrings(vals : List<String>) : List<String> {
+    private fun transposeNumStrings(vals : List<String>) : List<Int> {
         val maxlen = vals.maxOf { it.length }
-        return (0..<maxlen).map { idx -> vals.map { it[idx] }.joinToString("")}
+        return (0..<maxlen).map { idx -> vals.map { it[idx] }.joinToString("").trim().toInt()}
     }
 
     override fun partOne(): Any = cols.mapIndexed { idx, v ->  operation(ops[idx],  v.map { it.trim().toInt() } ) }.sum()
 
-    override fun partTwo(): Any {
-        val transposed = cols.map { transposeNumStrings(it) }.map { it.map { it.trim().toInt() } }
-        return transposed.mapIndexed { i, v -> operation(ops[i], v) }.sum()
-    }
+    override fun partTwo(): Any = cols.map { transposeNumStrings(it) }.mapIndexed { idx, v -> operation(ops[idx], v) }.sum()
 }
