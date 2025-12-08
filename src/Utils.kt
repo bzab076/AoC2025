@@ -191,5 +191,9 @@ data class Point3D (val x : Int, val y : Int, val z : Int){
     fun add(otherPoint : Point3D) : Point3D = Point3D(this.x + otherPoint.x, this.y + otherPoint.y, this.z + otherPoint.z)
     fun scalarMultiplication(m:Int) : Point3D = Point3D(x*m, y*m, z*m)
 
+    fun abs() : Long = this.x.toLong()*this.x.toLong() + this.y.toLong()*this.y.toLong() + this.z.toLong()*this.z.toLong()
+    fun sqrdist(otherPoint: Point3D) : Long = this.add(otherPoint.scalarMultiplication(-1)).abs()
+
+
     fun longID() : Long = x.toLong() + 10000*y.toLong() + 100000000*z.toLong()
 }
