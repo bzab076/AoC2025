@@ -12,3 +12,5 @@ build/
 /.idea/
 /gradle/
 /.idea/misc.xml
+/src/Test*
+/src/LPDouble.kt

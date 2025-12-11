@@ -1,4 +1,6 @@
 import java.io.File
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.system.measureTimeMillis
 
@@ -38,6 +40,11 @@ fun main(args: Array<String>) {
 
         val className = "Day${args.joinToString()}"
         println(className)
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val currentTime = LocalDateTime.now().format(formatter)
+        println(currentTime)
+        println()
+
         val dayClass = Class.forName(className).getDeclaredConstructor().newInstance() as AbstractDay
 
         try {

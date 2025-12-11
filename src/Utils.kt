@@ -1,19 +1,4 @@
-import java.lang.Exception
-import kotlin.collections.chunked
-import kotlin.collections.filter
-import kotlin.collections.flatMap
-import kotlin.collections.isNotEmpty
-import kotlin.collections.joinToString
-import kotlin.collections.map
-import kotlin.collections.plus
-import kotlin.collections.zipWithNext
 import kotlin.math.abs
-import kotlin.ranges.until
-import kotlin.text.isNotBlank
-import kotlin.text.split
-import kotlin.text.toInt
-import kotlin.text.toLong
-import kotlin.to
 
 
 /***********************************************
@@ -121,7 +106,7 @@ fun <T, U> cartesianProduct(c1: Collection<T>, c2: Collection<U>): List<Pair<T, 
  ************************************************/
 
 
-typealias Point = Pair<Int, Int>
+//typealias Point = Pair<Int, Int>
 
 data class Point2D (val x:Int, val y:Int) {
 
