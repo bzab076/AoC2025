@@ -9,10 +9,8 @@ class Day12 : AbstractDay(12) {
     private fun countParts(shape: List<String>) : Int = shape.sumOf { it.toCharArray().count { it=='#' } }
 
     override fun partOne(): Any =
-        regions.filter { (size, reqs) -> size.first*size.second >= reqs.mapIndexed { i, v -> v*countParts(shapes[i]) }.sum()}
-                .count{(size, reqs) -> size.first/3 * size.second/3 >= reqs.sum()}
+        regions.filter { (size, reqs) -> size.first*size.second >= reqs.mapIndexed { i, v -> v*countParts(shapes[i]) }.sum() }
+                .count { (size, reqs) -> size.first/3 * size.second/3 >= reqs.sum() }
 
-    override fun partTwo(): Any {
-        return "That is it for this year!!!"
-    }
+    override fun partTwo(): Any = "That is it for this year!!!"
 }

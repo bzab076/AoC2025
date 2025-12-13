@@ -1,3 +1,5 @@
+
+
 @Suppress("unused")
 class Day10 : AbstractDay(10) {
 
@@ -18,10 +20,7 @@ class Day10 : AbstractDay(10) {
             val idxs = nstr.toCharArray().map { chrIndex(it) }
             val btns = idxs.map { buttons[it]}
 
-            if(areButtonsOK(diagram,btns)) {
-                return btns.size
-            }
-
+            if(areButtonsOK(diagram,btns)) return btns.size
         }
 
         return -1
@@ -30,24 +29,20 @@ class Day10 : AbstractDay(10) {
     private fun areButtonsOK(diagram : String, buttons : List<List<Int>>) : Boolean {
         val mods = diagram.toCharArray().map { if(it=='#') 1 else 0 }
         val presses = diagram.toCharArray().indices.map{i -> buttons.count { it.contains(i) }}
-        return presses.zip(mods).all { (c,m) -> c%2 == m }
+        return presses.zip(mods).all { (c,m) -> c % 2 == m }
     }
-
 
     override fun partOne(): Any = lightDiagrams.zip(buttons).sumOf { (d, b) -> fewestButtons(d, b) }
 
     override fun partTwo(): Any = buttons.zip(joltages).sumOf { (b,j) -> optimizeButtonsLP(b,j) }
 
-
     private fun optimizeButtonsLP(buttonVector : List<List<Int>>, joltageVector : List<Int>) : Int {
 
         val matrix = joltageVector.indices.map{ btn -> buttonVector.map { if(it.contains(btn)) 1 else 0 }.toIntArray() }.toTypedArray()
         val b = joltageVector.toIntArray()
-
         val x = IntMinSumSolver.solve(matrix, b, timeLimitMs = 480_000L)
         val result = x!!.sum()
 
         return result
     }
-
 }

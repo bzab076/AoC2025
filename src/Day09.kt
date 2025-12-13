@@ -19,8 +19,7 @@ class Day09 : AbstractDay(9) {
 
         // try all (x,y) combinations that lie within the rectangle
         // inefficient but working
-        return if (cartesianProduct(xs,ys).all { p-> isPointInPolygon(p) })  (abs(corner1.first - corner2.first) +1 ) * (abs(corner1.second - corner2.second) +1)
-               else  0L
+        return if (cartesianProduct(xs,ys).all { p-> isPointInPolygon(p) }) (abs(corner1.first - corner2.first) +1) * (abs(corner1.second - corner2.second) +1) else  0L
     }
 
     fun isPointInPolygon(pt: Pair<Long, Long>): Boolean {

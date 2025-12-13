@@ -4,13 +4,13 @@ class Day08 : AbstractDay(8) {
     private val jboxes = inputLines().map{it.extractNumbers()}.map{ Point3D(it[0], it[1], it[2]) }
 
     private val dists = cartesianProduct(jboxes, jboxes)
-        .filter{(x,y) -> x.abs() > y.abs()}
-        .map{p -> p to p.first.sqrdist(p.second)}
+        .filter { (x,y) -> x.abs() > y.abs() }
+        .map { p -> p to p.first.sqrdist(p.second) }
         .sortedBy { it.second }
 
     private fun groupBoxes (connectedPairs : Int) : Pair<List<Set<Point3D>>, Long> {
 
-        val resultMap = emptyMap<Point3D, Set<Point3D>>().toMutableMap()
+        val resultMap = mutableMapOf<Point3D, Set<Point3D>>()
 
         dists.take(connectedPairs).map{it.first}.forEach { currentPair ->
 
@@ -44,7 +44,7 @@ class Day08 : AbstractDay(8) {
         return resultMap.values.toList() to 0L
     }
 
-    override fun partOne(): Any  =  groupBoxes(1000).first.map { it.size }.sorted().takeLast(3).fold(1){acc, v -> acc*v}
+    override fun partOne(): Any = groupBoxes(1000).first.map { it.size }.sorted().takeLast(3).fold(1){acc, v -> acc*v}
 
     override fun partTwo(): Any = groupBoxes(10000).second
 }

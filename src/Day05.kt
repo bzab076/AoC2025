@@ -5,12 +5,11 @@ import java.lang.Long.min
 class Day05 : AbstractDay(5) {
 
     private val ranges = inputLines().take(181).map { it.split("-") }.map { it.first().toLong() to it.last().toLong() }
-
     private val ingredients  = inputLines().drop(182).map { it.toLong() }
 
     private fun distinctRanges(myRanges : List<Pair<Long,Long>>) : Set<Pair<Long,Long>> {
 
-        val result = emptySet<Pair<Long, Long>>().toMutableSet()
+        val result = mutableSetOf<Pair<Long, Long>>()
 
         myRanges.forEach { range ->
             val frange = result.filter { range.first in (it.first..it.second) }
@@ -41,7 +40,7 @@ class Day05 : AbstractDay(5) {
         return result.toSet()
     }
 
-    override fun partOne(): Any = ingredients.count{ ingr -> ranges.any { ingr in (it.first..it.second) }}
+    override fun partOne(): Any = ingredients.count { ingr -> ranges.any { ingr in (it.first..it.second) } }
 
     override fun partTwo(): Any = distinctRanges(ranges.sortedBy { it.first }).sumOf { it.second - it.first + 1 }
 }

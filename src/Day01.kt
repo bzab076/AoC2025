@@ -1,3 +1,4 @@
+@Suppress("unused")
 class Day01 : AbstractDay(1) {
 
     private fun password(partTwo : Boolean) : Int {
@@ -9,9 +10,9 @@ class Day01 : AbstractDay(1) {
 
             val move = Integer.parseInt(line.substring(1))
             val olddial = dial
-            
-            if(line.startsWith("R")) dial = (dial + move).mod(100)
-            else dial = (dial - move).mod(100)
+
+            dial = if(line.startsWith("R")) (dial + move).mod(100)
+                   else (dial - move).mod(100)
 
             if(dial==0) result++
 
@@ -30,5 +31,5 @@ class Day01 : AbstractDay(1) {
 
     override fun partOne(): Any = password(false)
 
-    override fun partTwo(): Any  = password(true)
+    override fun partTwo(): Any = password(true)
 }

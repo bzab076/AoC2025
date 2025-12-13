@@ -23,7 +23,6 @@ class Day03 : AbstractDay(3) {
     override fun partOne(): Any = inputLines().sumOf { joltage(2,it)}
 
     override fun partTwo(): Any = inputLines().sumOf { joltage(12,it)}
-
 }
 
 

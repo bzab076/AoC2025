@@ -19,7 +19,7 @@ object IntMinSumSolver {
         val n = Ain[0].size
 
         // variable ordering (columns with larger total coefficients first)
-        val colScore = IntArray(n) { j -> (0 until m).sumBy { Ain[it][j] } }
+        val colScore = IntArray(n) { j -> (0 until m).sumOf { Ain[it][j] } }
         val order = (0 until n).sortedByDescending { colScore[it] }.toIntArray()
 
         // reorder A accordingly to A2 (m x n)
@@ -55,7 +55,7 @@ object IntMinSumSolver {
         // capacity feasibility check for remaining vars
         fun feasibleRemaining(rhs: IntArray, startCol: Int, maxVals: IntArray): Boolean {
             for (i in 0 until m) {
-                var cap: Long = 0L
+                var cap = 0L
                 for (col in startCol until n) cap += A2[i][col].toLong() * maxVals[col].toLong()
                 if (rhs[i].toLong() > cap) return false
             }
@@ -75,7 +75,7 @@ object IntMinSumSolver {
                     // capacity check with remaining maxInit
                     var ok = true
                     for (i in 0 until m) {
-                        var cap: Long = 0L
+                        var cap = 0L
                         for (c in col + 1 until n) cap += A2[i][c].toLong() * maxInit[c].toLong()
                         if (newRhs[i].toLong() > cap) { ok = false; break }
                     }
@@ -90,7 +90,7 @@ object IntMinSumSolver {
         }
 
         // compute a small lower bound for remaining sum: ceil(sum(rhs)/maxRowsPerVar)
-        val maxRowsPerVar = (0 until n).map { col -> (0 until m).sumBy { A2[it][col] } }.maxOrNull() ?: 1
+        val maxRowsPerVar = (0 until n).map { col -> (0 until m).sumOf { A2[it][col] } }.maxOrNull() ?: 1
         fun lowerBoundRemainingSum(rhs: IntArray): Int {
             val tot = rhs.sum()
             return if (maxRowsPerVar == 0) if (tot == 0) 0 else Int.MAX_VALUE else (tot + maxRowsPerVar - 1) / maxRowsPerVar
@@ -172,7 +172,6 @@ object IntMinSumSolver {
         // seed bestSum with greedy solution if available
         val greedy = greedyFeasible()
         if (greedy != null) {
-            bestSum = greedy.sum()
             bestSol = greedy
         }
 

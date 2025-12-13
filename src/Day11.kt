@@ -3,8 +3,8 @@ class Day11 : AbstractDay(11) {
 
     private val deviceGraph =  inputLines().associate{it.split(": ").zipWithNext { k, v -> k to v.split(" ") }.single()}
 
-    private val cache : MutableMap<String, Long> = emptyMap<String, Long>().toMutableMap()
-    private val cache2 : MutableMap<String, Pair<Pair<Long, Long>, Pair<Long, Long>>> = emptyMap<String, Pair<Pair<Long, Long>, Pair<Long, Long>>>().toMutableMap()
+    private val cache = mutableMapOf<String, Long>()
+    private val cache2 = mutableMapOf<String, Pair<Pair<Long, Long>, Pair<Long, Long>>>()
 
     private fun paths(startNode : String) : Long {
 
